@@ -4,7 +4,7 @@ import { useAuth } from '../context/useAuth';
 import { toast } from 'react-toastify';
 import { apiService } from '../services/api';
 import type { ReportStats } from '../services/api';
-import { CheckCircle, Clock, AlertCircle, FileText, MapPin, Image as ImageIcon, Filter } from 'lucide-react';
+import { CheckCircle, Clock, AlertCircle, FileText, MapPin, Image as ImageIcon, Filter, MessageSquare, Send } from 'lucide-react';
 
 interface Report {
     _id: string;
@@ -18,6 +18,11 @@ interface Report {
     status: 'pending' | 'in progress' | 'done';
     userId: string;
     createdAt: string;
+    adminComments?: Array<{
+        comment: string;
+        adminName: string;
+        timestamp: string;
+    }>;
 }
 
 export default function AdminDashboard() {
@@ -26,6 +31,7 @@ export default function AdminDashboard() {
     const [stats, setStats] = useState<ReportStats | null>(null);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState<string>('all');
+    const [commentInputs, setCommentInputs] = useState<{ [key: string]: string }>({});
 
     const fetchData = async () => {
         try {
@@ -63,6 +69,27 @@ export default function AdminDashboard() {
         } catch (error) {
             console.error('Error updating status:', error);
             toast.error('Failed to update status');
+        }
+    };
+
+    const addComment = async (reportId: string) => {
+        const comment = commentInputs[reportId]?.trim();
+        if (!comment) {
+            toast.error('Please enter a comment');
+            return;
+        }
+
+        try {
+            await axios.post(`http://localhost:3000/reports/${reportId}/comment`,
+                { comment },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+            toast.success('Comment added successfully');
+            setCommentInputs({ ...commentInputs, [reportId]: '' });
+            fetchData();
+        } catch (error) {
+            console.error('Error adding comment:', error);
+            toast.error('Failed to add comment');
         }
     };
 
@@ -240,7 +267,7 @@ export default function AdminDashboard() {
                         padding: '10px 16px',
                         borderRadius: '8px',
                         border: '1px solid var(--border-color)',
-                        backgroundColor: 'var(--card-bg)',
+                        backgroundColor: 'var(--input-bg)',
                         color: 'var(--text-primary)',
                         fontSize: '1rem',
                         cursor: 'pointer',
@@ -386,7 +413,7 @@ export default function AdminDashboard() {
                                         padding: '10px',
                                         borderRadius: '8px',
                                         border: '1px solid var(--border-color)',
-                                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                        backgroundColor: 'var(--input-bg)',
                                         color: 'var(--text-primary)',
                                         fontSize: '0.95rem',
                                         cursor: 'pointer',
@@ -397,6 +424,109 @@ export default function AdminDashboard() {
                                     <option value="in progress">In Progress</option>
                                     <option value="done">Completed</option>
                                 </select>
+                            </div>
+
+                            {/* Admin Comments Section */}
+                            <div style={{
+                                borderTop: '1px solid var(--border-color)',
+                                paddingTop: '15px',
+                                marginTop: '15px'
+                            }}>
+                                <label style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px',
+                                    marginBottom: '10px',
+                                    color: 'var(--text-secondary)',
+                                    fontSize: '0.9rem',
+                                    fontWeight: '600'
+                                }}>
+                                    <MessageSquare size={16} />
+                                    Admin Comments:
+                                </label>
+
+                                {/* Existing Comments */}
+                                {report.adminComments && report.adminComments.length > 0 && (
+                                    <div style={{
+                                        marginBottom: '12px',
+                                        maxHeight: '150px',
+                                        overflowY: 'auto',
+                                        padding: '10px',
+                                        backgroundColor: 'rgba(93, 173, 226, 0.05)',
+                                        borderRadius: '8px',
+                                        border: '1px solid var(--border-color)'
+                                    }}>
+                                        {report.adminComments.map((comment, idx) => (
+                                            <div key={idx} style={{
+                                                marginBottom: idx < report.adminComments!.length - 1 ? '10px' : '0',
+                                                paddingBottom: idx < report.adminComments!.length - 1 ? '10px' : '0',
+                                                borderBottom: idx < report.adminComments!.length - 1 ? '1px solid var(--border-color)' : 'none'
+                                            }}>
+                                                <div style={{
+                                                    fontSize: '0.85rem',
+                                                    color: 'var(--text-primary)',
+                                                    marginBottom: '4px'
+                                                }}>
+                                                    {comment.comment}
+                                                </div>
+                                                <div style={{
+                                                    fontSize: '0.75rem',
+                                                    color: 'var(--text-muted)',
+                                                    fontStyle: 'italic'
+                                                }}>
+                                                    — {comment.adminName} • {new Date(comment.timestamp).toLocaleString()}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Add Comment Input */}
+                                <div style={{ display: 'flex', gap: '8px' }}>
+                                    <input
+                                        type="text"
+                                        placeholder="Add a comment..."
+                                        value={commentInputs[report._id] || ''}
+                                        onChange={(e) => setCommentInputs({ ...commentInputs, [report._id]: e.target.value })}
+                                        onKeyPress={(e) => {
+                                            if (e.key === 'Enter') {
+                                                addComment(report._id);
+                                            }
+                                        }}
+                                        style={{
+                                            flex: 1,
+                                            padding: '8px 12px',
+                                            borderRadius: '8px',
+                                            border: '1px solid var(--border-color)',
+                                            backgroundColor: 'var(--input-bg)',
+                                            color: 'var(--text-primary)',
+                                            fontSize: '0.9rem',
+                                            outline: 'none'
+                                        }}
+                                    />
+                                    <button
+                                        onClick={() => addComment(report._id)}
+                                        style={{
+                                            padding: '8px 16px',
+                                            borderRadius: '8px',
+                                            border: 'none',
+                                            backgroundColor: 'var(--accent-color)',
+                                            color: 'white',
+                                            cursor: 'pointer',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '6px',
+                                            fontSize: '0.9rem',
+                                            fontWeight: '600',
+                                            transition: 'opacity 0.3s'
+                                        }}
+                                        onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
+                                        onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                                    >
+                                        <Send size={14} />
+                                        Send
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

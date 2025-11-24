@@ -75,6 +75,14 @@ function AppRoutes() {
         }
       />
       <Route
+        path="/report/edit/:id"
+        element={
+          <ProtectedRoute>
+            <Report />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/my-reports"
         element={
           <ProtectedRoute>

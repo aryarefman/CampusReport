@@ -1,11 +1,12 @@
 import { Router } from 'express';
-import { register, login, getMe } from '../controllers/auth.controller';
+import { register, login, getMe, googleLogin } from '../controllers/auth.controller';
 import { authenticateToken } from '../middleware/auth';
 
 const router = Router();
 
 router.post('/register', register);
 router.post('/login', login);
+router.post('/google', googleLogin);
 router.get('/me', authenticateToken, getMe);
 
 export default router;

@@ -13,11 +13,14 @@ interface Message {
 export default function Chatbot() {
     const { token } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
-    const [messages, setMessages] = useState<Message[]>([{
-        role: 'ai',
-        content: 'Hi! I\'m your CampusReport assistant. Ask me anything about facility reports, statistics, or how to use the system!',
-        timestamp: new Date()
-    }]);
+    const [messages, setMessages] = useState<Message[]>([
+        {
+            role: 'ai',
+            content:
+                "Hi! I'm your CampusReport assistant. Ask me anything about facility reports, statistics, or how to use the system!",
+            timestamp: new Date()
+        }
+    ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -33,51 +36,38 @@ export default function Chatbot() {
     const sendMessage = async () => {
         if (!input.trim() || isLoading) return;
 
-        const userMessage: Message = {
-            role: 'user',
-            content: input,
-            timestamp: new Date()
-        };
-
-        setMessages(prev => [...prev, userMessage]);
+        const userMsg: Message = { role: 'user', content: input, timestamp: new Date() };
+        setMessages(prev => [...prev, userMsg]);
         setInput('');
         setIsLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:3000/chatbot/chat',
+            const response = await axios.post(
+                'http://localhost:3000/chatbot/chat',
                 { message: input },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-
-            const aiMessage: Message = {
+            const aiMsg: Message = {
                 role: 'ai',
                 content: response.data.data.message,
                 timestamp: new Date(response.data.data.timestamp)
             };
-
-            setMessages(prev => [...prev, aiMessage]);
-        } catch (error) {
-            console.error('Chat error:', error);
-            console.error('Error details:', error.response?.data || error.message);
-
-            let errorMsg = 'Sorry, I encountered an error. Please try again.';
-            if (axios.isAxiosError(error)) {
-                if (error.response) {
-                    errorMsg = `Error: ${error.response.data?.message || error.response.statusText}`;
-                } else if (error.request) {
-                    errorMsg = 'No response from server. Please check if backend is running.';
+            setMessages(prev => [...prev, aiMsg]);
+        } catch (err) {
+            console.error('Chat error:', err);
+            let errMsg = 'Sorry, something went wrong. Please try again.';
+            if (axios.isAxiosError(err)) {
+                if (err.response) {
+                    errMsg = `Error: ${err.response.data?.message || err.response.statusText}`;
+                } else if (err.request) {
+                    errMsg = 'No response from server. Check if backend is running.';
                 } else {
-                    errorMsg = `Request error: ${error.message}`;
+                    errMsg = `Request error: ${err.message}`;
                 }
             }
-
-            toast.error(errorMsg);
-            const errorMessage: Message = {
-                role: 'ai',
-                content: errorMsg,
-                timestamp: new Date()
-            };
-            setMessages(prev => [...prev, errorMessage]);
+            toast.error(errMsg);
+            const errorMsg: Message = { role: 'ai', content: errMsg, timestamp: new Date() };
+            setMessages(prev => [...prev, errorMsg]);
         } finally {
             setIsLoading(false);
         }
@@ -110,14 +100,14 @@ export default function Chatbot() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     zIndex: 1000,
-                    transition: 'all 0.3s ease',
+                    transition: 'transform 0.3s ease',
                     transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'
                 }}
-                onMouseOver={(e) => {
+                onMouseOver={e => {
                     e.currentTarget.style.transform = isOpen ? 'rotate(180deg) scale(1.1)' : 'scale(1.1)';
                     e.currentTarget.style.backgroundColor = 'var(--primary-dark)';
                 }}
-                onMouseOut={(e) => {
+                onMouseOut={e => {
                     e.currentTarget.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
                     e.currentTarget.style.backgroundColor = 'var(--primary-color)';
                 }}
@@ -127,31 +117,36 @@ export default function Chatbot() {
 
             {/* Chat Card */}
             {isOpen && (
-                <div style={{
-                    position: 'fixed',
-                    bottom: '90px',
-                    right: '20px',
-                    width: '380px',
-                    height: '500px',
-                    backgroundColor: '#ffffff',
-                    borderRadius: '16px',
-                    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-                    border: '1px solid #e0e0e0',
-                    zIndex: 999,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'hidden',
-                    animation: 'slideUp 0.3s ease-out'
-                }}>
-                    {/* Header */}
-                    <div style={{
-                        padding: '20px',
-                        backgroundColor: 'var(--primary-color)',
-                        color: 'white',
+                <div
+                    style={{
+                        position: 'fixed',
+                        bottom: '90px',
+                        right: '20px',
+                        width: '100%',
+                        maxWidth: '380px',
+                        height: '500px',
+                        backgroundColor: 'var(--card-bg)',
+                        borderRadius: '16px',
+                        boxShadow: 'var(--shadow-lg)',
+                        border: '1px solid var(--border-color)',
+                        zIndex: 999,
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: '12px'
-                    }}>
+                        flexDirection: 'column',
+                        overflow: 'hidden',
+                        animation: 'slideUp 0.3s ease-out'
+                    }}
+                >
+                    {/* Header */}
+                    <div
+                        style={{
+                            padding: '20px',
+                            backgroundColor: 'var(--primary-color)',
+                            color: 'var(--text-primary)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px'
+                        }}
+                    >
                         <Bot size={24} />
                         <div>
                             <h3 style={{ margin: 0, fontSize: '1.1rem' }}>CampusReport Assistant</h3>
@@ -160,56 +155,56 @@ export default function Chatbot() {
                     </div>
 
                     {/* Messages */}
-                    <div style={{
-                        flex: 1,
-                        overflowY: 'auto',
-                        padding: '20px',
-                        backgroundColor: '#f5f5f5',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '12px'
-                    }}>
+                    <div
+                        style={{
+                            flex: 1,
+                            overflowY: 'auto',
+                            padding: '20px',
+                            backgroundColor: 'var(--background-alt)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '12px'
+                        }}
+                    >
                         {messages.map((msg, idx) => (
-                            <div
-                                key={idx}
-                                style={{
-                                    alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
-                                    maxWidth: '80%'
-                                }}
-                            >
-                                <div style={{
-                                    padding: '12px 16px',
-                                    borderRadius: '12px',
-                                    backgroundColor: msg.role === 'user'
-                                        ? 'var(--primary-color)'
-                                        : '#e8e8e8',
-                                    color: msg.role === 'user' ? 'white' : '#333333',
-                                    fontSize: '0.95rem',
-                                    lineHeight: '1.5',
-                                    wordWrap: 'break-word'
-                                }}>
+                            <div key={idx} style={{ alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start', maxWidth: '80%' }}>
+                                <div
+                                    style={{
+                                        padding: '12px 16px',
+                                        borderRadius: '12px',
+                                        backgroundColor: msg.role === 'user' ? 'var(--primary-color)' : 'var(--card-bg)',
+                                        color: msg.role === 'user' ? 'var(--text-primary)' : 'var(--text-primary)',
+                                        fontSize: '0.95rem',
+                                        lineHeight: '1.5',
+                                        wordBreak: 'break-word'
+                                    }}
+                                >
                                     {msg.content}
                                 </div>
-                                <div style={{
-                                    fontSize: '0.75rem',
-                                    color: 'var(--text-muted)',
-                                    marginTop: '4px',
-                                    textAlign: msg.role === 'user' ? 'right' : 'left'
-                                }}>
+                                <div
+                                    style={{
+                                        fontSize: '0.75rem',
+                                        color: 'var(--text-muted)',
+                                        marginTop: '4px',
+                                        textAlign: msg.role === 'user' ? 'right' : 'left'
+                                    }}
+                                >
                                     {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                 </div>
                             </div>
                         ))}
                         {isLoading && (
-                            <div style={{
-                                alignSelf: 'flex-start',
-                                padding: '12px 16px',
-                                borderRadius: '12px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px'
-                            }}>
+                            <div
+                                style={{
+                                    alignSelf: 'flex-start',
+                                    padding: '12px 16px',
+                                    borderRadius: '12px',
+                                    backgroundColor: 'rgba(255,255,255,0.05)',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '8px'
+                                }}
+                            >
                                 <Loader size={16} color="var(--accent-color)" className="spin" />
                                 <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Thinking...</span>
                             </div>
@@ -218,16 +213,18 @@ export default function Chatbot() {
                     </div>
 
                     {/* Input */}
-                    <div style={{
-                        padding: '16px',
-                        borderTop: '1px solid var(--border-color)',
-                        display: 'flex',
-                        gap: '10px'
-                    }}>
+                    <div
+                        style={{
+                            padding: '16px',
+                            borderTop: '1px solid var(--border-color)',
+                            display: 'flex',
+                            gap: '10px'
+                        }}
+                    >
                         <input
                             type="text"
                             value={input}
-                            onChange={(e) => setInput(e.target.value)}
+                            onChange={e => setInput(e.target.value)}
                             onKeyPress={handleKeyPress}
                             placeholder="Type your message..."
                             disabled={isLoading}
@@ -236,7 +233,7 @@ export default function Chatbot() {
                                 padding: '12px',
                                 borderRadius: '8px',
                                 border: '1px solid var(--border-color)',
-                                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                                backgroundColor: 'rgba(255,255,255,0.05)',
                                 color: 'var(--text-primary)',
                                 fontSize: '0.95rem',
                                 outline: 'none'
@@ -264,31 +261,15 @@ export default function Chatbot() {
                 </div>
             )}
 
+            {/* Animation keyframes */}
             <style>{`
-                @keyframes slideUp {
-                    from {
-                        transform: translateY(20px);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateY(0);
-                        opacity: 1;
-                    }
-                }
-                
-                .spin {
-                    animation: spin 1s linear infinite;
-                }
-                
-                @keyframes spin {
-                    from {
-                        transform: rotate(0deg);
-                    }
-                    to {
-                        transform: rotate(360deg);
-                    }
-                }
-            `}</style>
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        .spin { animation: spin 1s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      `}</style>
         </>
     );
 }

@@ -21,6 +21,8 @@ export const authenticateToken = (
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as {
       id: string;
       email: string;
+      role: 'user' | 'admin';
+      username: string;
     };
     req.user = decoded;
     next();

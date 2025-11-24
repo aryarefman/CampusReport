@@ -7,14 +7,20 @@ export const createReport = [
     upload.single('photo'),
     async (req: Request, res: Response) => {
         try {
-            const { title, description, lat, lng, userId } = req.body;
+            const { title, description, category, lat, lng, mapsLink, date, userId } = req.body;
             const photoUrl = req.file ? `/uploads/${req.file.filename}` : undefined;
 
             const report = await Report.create({
                 title,
                 description,
+                category,
                 photoUrl,
-                location: { lat: Number(lat), lng: Number(lng) },
+                location: {
+                    lat: lat ? Number(lat) : 0,
+                    lng: lng ? Number(lng) : 0
+                },
+                mapsLink,
+                date: date || new Date(),
                 userId,
                 status: 'pending',
             });
@@ -106,3 +112,105 @@ export const getReportStats = async (req: Request, res: Response) => {
         res.status(500).json({ success: false, message: 'Failed to fetch stats' });
     }
 };
+
+// Get single report by ID
+export const getReportById = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const report = await Report.findById(id);
+
+        if (!report) {
+            return res.status(404).json({ success: false, message: 'Report not found' });
+        }
+
+        res.json({ success: true, data: report });
+    } catch (error) {
+        console.error('Get report by ID error:', error);
+        res.status(500).json({ success: false, message: 'Failed to fetch report' });
+    }
+};
+
+// Update report (user can only update their own reports)
+export const updateReport = [
+    upload.single('photo'),
+    async (req: Request, res: Response) => {
+        try {
+            const { id } = req.params;
+            // @ts-ignore - user is attached by middleware
+            const userId = req.user.id;
+            const { title, description, category, lat, lng, mapsLink, date } = req.body;
+
+            // Find the report
+            const report = await Report.findById(id);
+            if (!report) {
+                return res.status(404).json({ success: false, message: 'Report not found' });
+            }
+
+            // Check if user owns this report
+            if (report.userId !== userId) {
+                return res.status(403).json({ success: false, message: 'You can only edit your own reports' });
+            }
+
+            // Update fields
+            const updateData: any = {};
+            if (title) updateData.title = title;
+            if (description) updateData.description = description;
+            if (category) updateData.category = category;
+            if (mapsLink !== undefined) updateData.mapsLink = mapsLink;
+            if (date) updateData.date = date;
+            if (lat !== undefined || lng !== undefined) {
+                updateData.location = {
+                    lat: lat ? Number(lat) : report.location.lat,
+                    lng: lng ? Number(lng) : report.location.lng
+                };
+            }
+            if (req.file) {
+                updateData.photoUrl = `/uploads/${req.file.filename}`;
+            }
+
+            const updated = await Report.findByIdAndUpdate(id, updateData, { new: true });
+            res.json({ success: true, data: updated });
+        } catch (error) {
+            console.error('Update report error:', error);
+            res.status(500).json({ success: false, message: 'Failed to update report' });
+        }
+    }
+];
+
+// Admin: add comment to a report
+export const addAdminComment = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { comment } = req.body;
+        // @ts-ignore - user is attached by middleware
+        const adminName = req.user.username || 'Admin';
+
+        if (!comment || !comment.trim()) {
+            return res.status(400).json({ success: false, message: 'Comment is required' });
+        }
+
+        const report = await Report.findById(id);
+        if (!report) {
+            return res.status(404).json({ success: false, message: 'Report not found' });
+        }
+
+        // Add comment to array
+        if (!report.adminComments) {
+            report.adminComments = [];
+        }
+
+        report.adminComments.push({
+            comment: comment.trim(),
+            adminName,
+            timestamp: new Date()
+        });
+
+        await report.save();
+
+        res.json({ success: true, data: report });
+    } catch (error) {
+        console.error('Add comment error:', error);
+        res.status(500).json({ success: false, message: 'Failed to add comment' });
+    }
+};
+

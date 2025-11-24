@@ -1,55 +1,56 @@
-import dotenv from 'dotenv';
-import './config/mongo';
-dotenv.config();
-
-import express from 'express';
 import path from 'path';
+import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
+import './config/mongo';
 import authRoutes from './routes/auth.routes';
 import reportRoutes from './routes/report.routes';
 import chatbotRoutes from './routes/chatbot.routes';
+import chatRoutes from './routes/chat.routes';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const uploadsDir = path.resolve(__dirname, '../..', 'uploads');
+const uploadsDir = path.resolve(__dirname, '..', '..', 'uploads');
 
-// CORS middleware
-app.use(cors({
-  origin: 'http://localhost:5173',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));
-
-app.use(express.json());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    credentials: true,
+  }),
+);
+app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(uploadsDir));
 
 app.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Welcome to CampusReport API'
-  });
-});
-
-app.get('/health-check', (req, res) => {
-  const currentDate = new Date().toDateString();
+  const currentDate = new Date().toISOString();
   res.status(200).json({
     success: true,
-    message: 'Hello World!',
-    date: currentDate
+    message: 'CampusReport API',
+    date: currentDate,
   });
 });
 
 app.use('/auth', authRoutes);
-app.use('/uploads', express.static(uploadsDir));
 app.use('/reports', reportRoutes);
 app.use('/chatbot', chatbotRoutes);
+app.use('/chat', chatRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Route not found'
+    message: 'Route not found',
+  });
+});
+
+app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  console.error(err);
+  res.status(500).json({
+    success: false,
+    message: err.message || 'Internal server error',
   });
 });
 
