@@ -42,7 +42,27 @@
 .balloon-image {
     position: fixed;
     z-index: 5;
+    pointer-events: none;
+    width: 350px;
+    height: auto;
+    animation: floatBalloon 6s ease-in-out infinite;
+}
 
+.balloon-left {
+    left: calc(40% - 300px);
+    top: 15%;
+    transform: translateX(0);
+    animation-delay: 0s;
+}
+
+/* Balloon position in dark mode (higher) */
+[data-theme="dark"] .balloon-left {
+    top: 5%;
+}
+
+@keyframes floatBalloon {
+
+    0%,
     100% {
         transform: translateY(0);
     }

@@ -58,10 +58,15 @@
 }
 
 .balloon-left {
-    left: calc(40% - 350px);
-    top: 20%;
+    left: calc(40% - 300px);
+    top: 15%;
     transform: translateX(0);
     animation-delay: 0s;
+}
+
+/* Balloon position in dark mode (higher) */
+[data-theme="dark"] .balloon-left {
+    top: 5%;
 }
 
 @keyframes floatBalloon {
