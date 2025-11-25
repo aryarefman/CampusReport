@@ -5,8 +5,9 @@ import axios from 'axios';
 import {
   FileText, PlusCircle, Shield, User, Mail,
   CheckCircle, Clock, AlertCircle, TrendingUp,
-  Calendar, MapPin, Eye, X, Tag
+  Calendar, MapPin, Eye, X, Tag, BarChart3
 } from 'lucide-react';
+import { AnalyticsCharts } from '../components/AnalyticsCharts';
 
 interface Report {
   _id: string;
@@ -43,6 +44,10 @@ export default function Dashboard() {
   const [allReports, setAllReports] = useState<Report[]>([]);
   const [allStats, setAllStats] = useState<Stats>({ total: 0, pending: 0, inProgress: 0, done: 0 });
 
+  // Analytics States
+  const [userAnalytics, setUserAnalytics] = useState<any>(null);
+  const [analyticsLoading, setAnalyticsLoading] = useState(true);
+
   // UI States
   const [loading, setLoading] = useState(true);
   const [showAllReports, setShowAllReports] = useState(false);
@@ -51,6 +56,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchDashboardData();
+    fetchUserAnalytics();
   }, [token]);
 
   const fetchDashboardData = async () => {
@@ -91,6 +97,19 @@ export default function Dashboard() {
       console.error('Error fetching dashboard data:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchUserAnalytics = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/reports/analytics?scope=personal', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setUserAnalytics(response.data.data);
+    } catch (error) {
+      console.error('Error fetching user analytics:', error);
+    } finally {
+      setAnalyticsLoading(false);
     }
   };
 
@@ -163,8 +182,12 @@ export default function Dashboard() {
             fontSize: '1.5rem',
             color: 'var(--text-primary)',
             marginBottom: '20px',
-            fontWeight: '600'
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
           }}>
+            <TrendingUp size={28} />
             My Reports Statistics
           </h2>
           <div style={{
@@ -256,6 +279,23 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* User Analytics Charts */}
+        <div style={{ marginBottom: '40px' }}>
+          <h2 style={{
+            fontSize: '1.5rem',
+            color: 'var(--text-primary)',
+            marginBottom: '20px',
+            fontWeight: '600',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <BarChart3 size={28} />
+            My Reports Analytics
+          </h2>
+          <AnalyticsCharts data={userAnalytics} loading={analyticsLoading} />
         </div>
 
         {/* Campus Reports Statistics */}

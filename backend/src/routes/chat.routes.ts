@@ -1,12 +1,28 @@
 import { Router } from 'express';
-import { sendMessage, getMessages, getConversations } from '../controllers/chat.controller';
-import { authenticateToken } from '../middleware/auth';
+import {
+    getUserChat,
+    sendMessage,
+    getAllChats,
+    getChatById,
+    replyToUser,
+    markAsRead,
+    closeChat,
+    getUnreadCount
+} from '../controllers/chat.controller';
+import { authenticateToken, requireAdmin } from '../middleware/auth';
 
 const router = Router();
 
-router.post('/', authenticateToken, sendMessage);
-router.get('/', authenticateToken, getMessages);
-router.get('/conversations', authenticateToken, getConversations); // Admin only
-router.get('/:otherUserId', authenticateToken, getMessages);
+// User routes
+router.get('/my-chat', authenticateToken, getUserChat);
+router.post('/send', authenticateToken, sendMessage);
+router.get('/unread-count', authenticateToken, getUnreadCount);
+router.put('/:id/read', authenticateToken, markAsRead);
+
+// Admin routes
+router.get('/all', authenticateToken, requireAdmin, getAllChats);
+router.get('/:id', authenticateToken, getChatById);
+router.post('/:id/reply', authenticateToken, requireAdmin, replyToUser);
+router.put('/:id/close', authenticateToken, requireAdmin, closeChat);
 
 export default router;

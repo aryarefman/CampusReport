@@ -85,10 +85,11 @@ export default function Chatbot() {
             {/* Floating Button */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
+                className="chatbot-button"
                 style={{
                     position: 'fixed',
-                    bottom: '20px',
-                    right: '20px',
+                    bottom: '30px',
+                    right: '30px',
                     width: '60px',
                     height: '60px',
                     borderRadius: '50%',
@@ -99,7 +100,7 @@ export default function Chatbot() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    zIndex: 1000,
+                    zIndex: 999,
                     transition: 'transform 0.3s ease',
                     transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'
                 }}
@@ -118,6 +119,7 @@ export default function Chatbot() {
             {/* Chat Card */}
             {isOpen && (
                 <div
+                    className="chatbot-card"
                     style={{
                         position: 'fixed',
                         bottom: '90px',
@@ -269,6 +271,35 @@ export default function Chatbot() {
         }
         .spin { animation: spin 1s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        /* Responsive styles for chatbot */
+        @media (max-width: 768px) {
+          .chatbot-card {
+            width: calc(100% - 40px) !important;
+            max-width: calc(100% - 40px) !important;
+            right: 20px !important;
+            left: 20px !important;
+            height: 450px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .chatbot-card {
+            width: calc(100% - 20px) !important;
+            max-width: calc(100% - 20px) !important;
+            right: 10px !important;
+            left: 10px !important;
+            height: 400px !important;
+            bottom: 80px !important;
+          }
+          
+          .chatbot-button {
+            width: 50px !important;
+            height: 50px !important;
+            bottom: 15px !important;
+            right: 15px !important;
+          }
+        }
       `}</style>
         </>
     );

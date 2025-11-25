@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap');
 
 .navbar {
-  background: rgba(0,0,0,.4);
+  background: rgba(0, 0, 0, .4);
   box-shadow: var(--shadow-sm);
   position: fixed;
   top: 20px;
@@ -10,7 +10,7 @@
   width: 85%;
   max-width: 1200px;
   z-index: 1000;
-  border: 1px solid rgba(44,95,125,.3);
+  border: 1px solid rgba(44, 95, 125, .3);
   border-radius: 50px;
   backdrop-filter: blur(10px);
   transition: all .3s ease;
@@ -18,8 +18,8 @@
 }
 
 [data-theme=light] .navbar {
-  background: rgba(255,255,255,.85);
-  border: 1px solid rgba(44,95,125,.2);
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid rgba(44, 95, 125, .2);
 }
 
 .nav-container {
@@ -30,7 +30,7 @@
 }
 
 .nav-brand {
-  font-family: Sen,sans-serif;
+  font-family: Sen, sans-serif;
   font-size: 24px;
   font-weight: 700;
   color: var(--primary-color);
@@ -84,7 +84,8 @@
   font-size: 15px;
 }
 
-.btn-logout,.btn-theme-toggle {
+.btn-logout,
+.btn-theme-toggle {
   padding: 8px;
   background: transparent;
   border: none;
@@ -152,12 +153,13 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
 .dashboard-card {
-  background: var(--card-bg);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-md);
@@ -170,10 +172,26 @@
   animation: fadeInUp .6s ease-out forwards;
 }
 
-.dashboard-card:nth-child(1) { animation-delay: .1s }
-.dashboard-card:nth-child(2) { animation-delay: .2s }
-.dashboard-card:nth-child(3) { animation-delay: .3s }
-.dashboard-card:nth-child(4) { animation-delay: .4s }
+[data-theme="dark"] .dashboard-card {
+  background: rgba(30, 30, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-card:nth-child(1) {
+  animation-delay: .1s
+}
+
+.dashboard-card:nth-child(2) {
+  animation-delay: .2s
+}
+
+.dashboard-card:nth-child(3) {
+  animation-delay: .3s
+}
+
+.dashboard-card:nth-child(4) {
+  animation-delay: .4s
+}
 
 .dashboard-card:hover {
   transform: translateY(-8px);
@@ -189,12 +207,20 @@
   color: #fff;
 }
 
-.card-icon.success { background: linear-gradient(135deg,#27ae60,#229954) }
-.card-icon.accent { background: linear-gradient(135deg,#5dade2,#3498db) }
-.card-icon.secondary { background: linear-gradient(135deg,#8b6f47,#6d5d3a) }
+.card-icon.success {
+  background: linear-gradient(135deg, #27ae60, #229954)
+}
+
+.card-icon.accent {
+  background: linear-gradient(135deg, #5dade2, #3498db)
+}
+
+.card-icon.secondary {
+  background: linear-gradient(135deg, #8b6f47, #6d5d3a)
+}
 
 .user-card .card-icon {
-  background: linear-gradient(135deg,var(--primary-color),var(--primary-dark));
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
 }
 
 .card-content {
@@ -212,14 +238,16 @@
   margin: 0;
 }
 
-.user-details,.stats-grid {
+.user-details,
+.stats-grid {
   display: flex;
   flex-direction: column;
   gap: 14px;
   margin-top: 12px;
 }
 
-.detail-item,.stat-item {
+.detail-item,
+.stat-item {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -231,12 +259,14 @@
   overflow-wrap: anywhere;
 }
 
-.detail-item svg,.stat-item svg {
+.detail-item svg,
+.stat-item svg {
   color: var(--primary-color);
   flex-shrink: 0;
 }
 
-.detail-item span,.stat-item span:first-child {
+.detail-item span,
+.stat-item span:first-child {
   color: var(--text-secondary);
   line-height: 1.4;
 }
@@ -270,10 +300,16 @@
   color: #fff;
 }
 
-.badge.success { background: var(--success-color) }
-.badge.accent { background: var(--accent-color) }
+.badge.success {
+  background: var(--success-color)
+}
 
-.action-subtitle,.stats-subtitle {
+.badge.accent {
+  background: var(--accent-color)
+}
+
+.action-subtitle,
+.stats-subtitle {
   color: var(--text-secondary);
   font-size: .95rem;
   margin-bottom: 12px;
@@ -337,29 +373,84 @@
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px) }
-  to { opacity: 1; transform: translateY(0) }
+  from {
+    opacity: 0;
+    transform: translateY(20px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0)
+  }
 }
 
 @media (max-width:992px) {
-  .navbar { width: 90% }
-  .nav-container { padding: 14px 24px }
-  .nav-links { gap: 20px }
+  .navbar {
+    width: 90%
+  }
+
+  .nav-container {
+    padding: 14px 24px
+  }
+
+  .nav-links {
+    gap: 20px
+  }
 }
 
 @media (max-width:768px) {
-  .navbar { width: 92%; top: 15px }
-  .nav-container { flex-direction: column; gap: 16px; padding: 14px 20px }
-  .nav-links { gap: 18px; font-size: 14px }
-  .dashboard-main { padding-top: 100px; padding-left: 15px; padding-right: 15px }
-  .dashboard-header h1 { font-size: 2.2rem }
-  .dashboard-grid { grid-template-columns: 1fr; gap: 20px }
-  .card-icon { height: 120px }
-  .card-content { padding: 20px }
+  .navbar {
+    width: 92%;
+    top: 15px
+  }
+
+  .nav-container {
+    flex-direction: column;
+    gap: 16px;
+    padding: 14px 20px
+  }
+
+  .nav-links {
+    gap: 18px;
+    font-size: 14px
+  }
+
+  .dashboard-main {
+    padding-top: 100px;
+    padding-left: 15px;
+    padding-right: 15px
+  }
+
+  .dashboard-header h1 {
+    font-size: 2.2rem
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 20px
+  }
+
+  .card-icon {
+    height: 120px
+  }
+
+  .card-content {
+    padding: 20px
+  }
 }
 
 @media (max-width:480px) {
-  .nav-brand span,.username { display: none }
-  .dashboard-header h1 { font-size: 1.9rem }
-  .card-content h3 { font-size: 1.25rem }
+
+  .nav-brand span,
+  .username {
+    display: none
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.9rem
+  }
+
+  .card-content h3 {
+    font-size: 1.25rem
+  }
 }

@@ -1,3 +1,4 @@
+// src/routes/report.routes.ts
 import { Router } from 'express';
 import {
     createReport,
@@ -9,6 +10,10 @@ import {
     getReportById,
     updateReport,
     addAdminComment,
+    deleteAdminComment,
+    getAnalytics,
+    getRecentActivity,
+    exportReports
 } from '../controllers/report.controller';
 import { analyzeImage } from '../controllers/image-analysis.controller';
 import { authenticateToken } from '../middleware/auth';
@@ -18,31 +23,27 @@ const router = Router();
 // Image analysis endpoint
 router.post('/analyze-image', authenticateToken, analyzeImage);
 
-// Public endpoint to create a report (requires auth for userId)
+// Public report creation (requires auth)
 router.post('/', authenticateToken, createReport);
 
-// Get reports for the authenticated user
+// User-specific endpoints
 router.get('/my-reports', authenticateToken, getMyReports);
-
-// Admin: get report statistics
-router.get('/stats', authenticateToken, getReportStats);
-
-// Get single report by ID
-// Get reports for a specific user (auth required)
 router.get('/user/:userId', authenticateToken, getUserReports);
 
+// Admin statistics and analytics (must be before generic routes)
+router.get('/stats', authenticateToken, getReportStats);
+router.get('/analytics', authenticateToken, getAnalytics);
+router.get('/activity', authenticateToken, getRecentActivity);
+router.get('/export', authenticateToken, exportReports);
+
+// Report CRUD operations
 router.get('/:id', authenticateToken, getReportById);
-
-// Update report (user can only update their own)
 router.put('/:id', authenticateToken, updateReport);
-
-// Admin: get all reports (optional status filter)
-router.get('/', authenticateToken, getAllReports);
-
-// Admin: update status of a report
 router.patch('/:id/status', authenticateToken, updateReportStatus);
-
-// Admin: add comment to a report
 router.post('/:id/comment', authenticateToken, addAdminComment);
+router.delete('/:id/comment/:commentId', authenticateToken, deleteAdminComment);
+
+// Admin: get all reports (optional filters)
+router.get('/', authenticateToken, getAllReports);
 
 export default router;

@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import { Schema, model, Document, Types } from 'mongoose';
 
 export interface IReport extends Document {
     title: string;
@@ -12,6 +12,10 @@ export interface IReport extends Document {
     mapsLink?: string;
     date: Date;
     status: 'pending' | 'in progress' | 'done';
+    priority: 'low' | 'medium' | 'high' | 'critical';
+    feedback?: string;
+    rating?: number;
+    assignedTo?: Types.ObjectId;
     userId: string;
     adminComments?: Array<{
         comment: string;
@@ -35,6 +39,10 @@ const ReportSchema = new Schema<IReport>(
         mapsLink: { type: String },
         date: { type: Date, required: true },
         status: { type: String, enum: ['pending', 'in progress', 'done'], default: 'pending' },
+        priority: { type: String, enum: ['low', 'medium', 'high', 'critical'], default: 'medium' },
+        feedback: { type: String },
+        rating: { type: Number, min: 1, max: 5 },
+        assignedTo: { type: Schema.Types.ObjectId, ref: 'User' },
         userId: { type: String, required: true },
         adminComments: [{
             comment: { type: String, required: true },

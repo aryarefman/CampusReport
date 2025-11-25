@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.routes';
 import reportRoutes from './routes/report.routes';
 import chatbotRoutes from './routes/chatbot.routes';
 import chatRoutes from './routes/chat.routes';
+import userRoutes from './routes/user.routes';
 
 dotenv.config();
 
@@ -37,7 +38,8 @@ app.get('/', (req, res) => {
 app.use('/auth', authRoutes);
 app.use('/reports', reportRoutes);
 app.use('/chatbot', chatbotRoutes);
-app.use('/chat', chatRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/users', userRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

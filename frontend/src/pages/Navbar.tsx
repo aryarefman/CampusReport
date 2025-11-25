@@ -1,15 +1,12 @@
-// src/components/Navbar.tsx
+// src/pages/Navbar.tsx
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/useAuth';
 import {
   FileText,
-  Home,
-  PlusCircle,
   LogOut,
   Moon,
   Sun,
   User,
-  Shield
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './Navbar.css';
@@ -20,7 +17,7 @@ export default function Navbar() {
   const location = useLocation();
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
-  // Load theme dari localStorage
+  // Load theme from localStorage
   useEffect(() => {
     const saved = (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
     setTheme(saved);
@@ -39,7 +36,7 @@ export default function Navbar() {
     navigate('/login');
   };
 
-  // Jangan tampilkan navbar di halaman login/register
+  // Hide navbar on unauthenticated pages (login/register)
   if (!isAuthenticated) return null;
 
   return (
@@ -54,34 +51,38 @@ export default function Navbar() {
         {/* LINKS */}
         <div className="nav-links">
           <Link
-            to="/dashboard"
-            className={`nav-link ${location.pathname === '/dashboard' ? 'active' : ''}`}
+            to="/home"
+            className={`nav-link ${location.pathname === '/home' ? 'active' : ''}`}
           >
-            <Home size={20} />
-            <span style={{ marginLeft: 6 }}>Home</span>
+            Home
           </Link>
           <Link
             to="/report"
             className={`nav-link ${location.pathname === '/report' ? 'active' : ''}`}
           >
-            <PlusCircle size={20} />
-            <span style={{ marginLeft: 6 }}>Submit Report</span>
+            Report
           </Link>
           <Link
             to="/my-reports"
             className={`nav-link ${location.pathname === '/my-reports' ? 'active' : ''}`}
           >
-            <FileText size={20} />
-            <span style={{ marginLeft: 6 }}>My Reports</span>
+            My Reports
           </Link>
           {user?.role === 'admin' && (
-            <Link
-              to="/admin"
-              className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
-            >
-              <Shield size={20} />
-              <span style={{ marginLeft: 6 }}>Admin</span>
-            </Link>
+            <>
+              <Link
+                to="/admin"
+                className={`nav-link ${location.pathname === '/admin' ? 'active' : ''}`}
+              >
+                Manage
+              </Link>
+              <Link
+                to="/admin/chat"
+                className={`nav-link ${location.pathname === '/admin/chat' ? 'active' : ''}`}
+              >
+                Chat
+              </Link>
+            </>
           )}
         </div>
 
@@ -102,4 +103,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
