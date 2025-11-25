@@ -462,12 +462,21 @@ Authorization: Bearer <token>
 - **Headings**: Bold, large sizes
 - **Body**: Regular weight, readable sizes
 
-### UI/UX
-- **Glassmorphism** - Transparent cards with blur
-- **Smooth Animations** - Hover effects, transitions
-- **Responsive Grid** - Auto-fit columns
-- **Dark Mode** - Full dark theme support
-- **Toast Notifications** - User feedback
+### UI/UX Features
+- **Glassmorphism** - Transparent cards with blur effect and subtle borders
+- **Smooth Animations** - Hover effects, transitions, floating animations
+- **Responsive Grid** - Auto-fit columns for all screen sizes
+- **Dark Mode** - Full dark theme support with automatic theme persistence
+- **Toast Notifications** - Real-time user feedback
+- **Theme Toggle** - Sun/Moon icon button for easy theme switching
+- **Decorative Elements**:
+  - ☁️ **Animated Clouds** - 14 floating clouds with varying sizes and positions
+  - ✈️ **Airplane (Light Mode)** - Decorative airplane image in light theme
+  - 🎈 **Hot Air Balloon (Dark Mode)** - Decorative balloon image in dark theme
+  - 🏙️ **Side Buildings** - Left and right building silhouettes
+- **Consistent Design** - Same visual concept across Login, Register, and Home pages
+- **Silhouette Icons** - Modern lucide-react icons throughout the app
+- **Floating Animations** - Smooth up-down movement for clouds and flying objects
 
 ---
 
