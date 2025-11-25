@@ -40,7 +40,7 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 - 👥 **Admin Dashboard** - Kelola semua laporan dari satu tempat
 - 📈 **Statistik Real-time** - Lihat metrics dan analytics laporan
 - ✅ **Update Status** - Ubah status laporan dengan dropdown (Pending → In Progress → Done)
-- � **Add Comments** - Berikan feedback dan catatan pada setiap laporan
+- � **Add Comments** - Berikan feedback dan catatan pada setiap laporan (Auto)
 - �🗑️ **Manajemen Laporan** - Hapus laporan yang tidak valid
 - � **Filter Laporan** - Filter berdasarkan status untuk fokus pada prioritas
 - 📊 **User Management** - Kelola users dan ubah role (admin/user)
