@@ -49,44 +49,67 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 
 ### Website
 ### Login
-<img width="1919" height="1070" alt="image" src="https://github.com/user-attachments/assets/1f5bab4f-8a5b-42fb-9e59-5ca14155d1ec" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/0e7a753f-1e7d-4daa-9718-5720fad43173" />
 
 ### Register
-<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/d5492372-48d9-4d95-9aa1-8a964d217edd" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/7ba96261-9d4d-4506-a6da-beddf48f5c94" />
 
 ### User
+#### Home
+<img width="1917" height="1196" alt="image" src="https://github.com/user-attachments/assets/0a656aa4-527b-4acd-9773-0fb28751ae6c" />
+
 #### Dashboard
-<img width="1919" height="1065" alt="image" src="https://github.com/user-attachments/assets/c486069e-c723-47ad-9952-1d5385010935" />
-<img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/59d3390b-12a1-4385-ae61-84ee60a33598" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/a6182991-b170-482f-83a7-b2d7ba4f8195" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/fb894085-67e3-4ba9-b34c-a8eef41ea9f9" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/77432bbb-21f5-40aa-89ca-78b99bb4174d" />
 
 #### Submit Report
-<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/b4b8abb1-98e3-40c2-96cb-f69498144153" />
-<img width="1908" height="1043" alt="image" src="https://github.com/user-attachments/assets/f380944e-e9ca-4490-8b1a-50b5d384c548" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/157391b1-8921-403e-a975-7a8a6d6cfd6c" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/88bb2cfa-73cd-4af1-9465-2eb324c6ad4f" />
 
 #### My Report
-<img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/ddc349fb-9f47-4535-a56d-708949f007cc" />
+<img width="1918" height="1199" alt="image" src="https://github.com/user-attachments/assets/99abd6c2-c79f-4977-ace1-81f974b1e0d6" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/c39e8384-e41a-4f9f-ada6-55fff2ffde3d" />
 
 #### ChatBot
-<img width="1918" height="997" alt="image" src="https://github.com/user-attachments/assets/18dacd40-19c7-4e7c-a6ba-500dcaba9ab5" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/c0cf72ef-97d7-4240-bb48-8504f824419d" />
+
+#### Chat User to Admin
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/d0f1526a-425e-48d5-9363-9d27629518b2" />
 
 ### Admin
+#### Home
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/bb8ee5fb-ccab-4d26-92e6-7c5b174172f1" />
+
 #### Dashboard
-<img width="1917" height="1062" alt="image" src="https://github.com/user-attachments/assets/27c478f7-2f60-4fe9-b0d8-8181d3b08689" />
-<img width="1919" height="1069" alt="image" src="https://github.com/user-attachments/assets/5ad77730-4dff-49c4-a314-b2b3286ae6f9" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/1dc8e9a8-eecc-42c7-8860-3bd10dfdc19e" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/3141e096-772c-445f-8e4d-9b6625c33919" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/7bd0dd6f-0907-4b85-8016-8145b93221e1" />
 
 #### Submit Report
-<img width="1918" height="1067" alt="image" src="https://github.com/user-attachments/assets/b1768059-9ffd-455e-9d57-63655d5ce8c9" />
-<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/5a4f8183-0edc-4767-a49c-bdb32a7eacea" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/a342121c-c938-43b3-804d-896336541fcd" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/d45d28af-6fe2-4938-b1c0-d40abf78e524" />
 
 #### My Report
-<img width="1913" height="1063" alt="image" src="https://github.com/user-attachments/assets/11fbecd5-eefd-4f06-a93e-8fddcd08922b" />
-
-#### Admin
-<img width="1919" height="1062" alt="image" src="https://github.com/user-attachments/assets/fb6c0365-5605-4d6c-813a-07b8c07f6a01" />
-<img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/af09dda5-9f04-4e35-81c9-e3bb67728012" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/0b2a511b-149c-42ea-b32d-e13b3dd7e80b" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/04e01f81-ae52-48c8-9835-bb47b671da5e" />
 
 #### Chatbot
-<img width="1919" height="1069" alt="image" src="https://github.com/user-attachments/assets/e3970d80-e293-4658-9772-72924ab9d492" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/b8079be6-ca74-4218-8176-367713f3196c" />
+
+#### Chat Admin to User
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/779b4218-a5a9-47f8-89dc-40e64da41103" />
+
+#### Admin Dashboard
+##### Overview
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/b07e7a68-b057-449d-b78e-fb91f7249ea0" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/c5c1c38d-c911-406c-8fae-c400f986330d" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/49716abb-e457-467b-92b6-41ce8c2dec36" />
+
+##### Manage Reports & Admin Comment
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/76045a7e-9d86-4e00-94f1-75716aa79899" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/bde81a0a-509b-4609-a722-b49e99d2c8af" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/86984999-2846-42b6-b01e-32a4bcc3331d" />
 
 ## 🛠️ Tech Stack
 
