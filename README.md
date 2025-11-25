@@ -27,8 +27,8 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 
 #### Untuk User (Mahasiswa/Staf):
 - 📝 **Pelaporan Mudah** - Form intuitif dengan upload foto dan lokasi Google Maps
-- 🤖 **AI Image Analysis** - Analisis gambar otomatis menggunakan Gemini AI untuk auto-fill form dengan deskripsi detail (150-200 kata)
-- 💬 **AI Chatbot** - Asisten virtual untuk menjawab pertanyaan tentang sistem dan statistik
+- 💬 **Autamatic Dscriptive** - Auto-fill form dengan deskripsi detail
+- 🤖 **AI Chatbot** - Asisten virtual untuk menjawab pertanyaan tentang sistem dan statistik
 - 📊 **Dashboard Transparan** - Lihat semua laporan kampus dan status penanganan
 - 🔍 **Tracking Laporan** - Pantau status laporan pribadi (Pending, In Progress, Done)
 - ✏️ **Edit Laporan** - Ubah laporan yang sudah dibuat sebelum diproses
@@ -46,6 +46,47 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 - 📊 **User Management** - Kelola users dan ubah role (admin/user)
 
 ---
+
+### Website
+### Login
+<img width="1919" height="1070" alt="image" src="https://github.com/user-attachments/assets/1f5bab4f-8a5b-42fb-9e59-5ca14155d1ec" />
+
+### Register
+<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/d5492372-48d9-4d95-9aa1-8a964d217edd" />
+
+### User
+#### Dashboard
+<img width="1919" height="1065" alt="image" src="https://github.com/user-attachments/assets/c486069e-c723-47ad-9952-1d5385010935" />
+<img width="1919" height="1067" alt="image" src="https://github.com/user-attachments/assets/59d3390b-12a1-4385-ae61-84ee60a33598" />
+
+#### Submit Report
+<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/b4b8abb1-98e3-40c2-96cb-f69498144153" />
+<img width="1908" height="1043" alt="image" src="https://github.com/user-attachments/assets/f380944e-e9ca-4490-8b1a-50b5d384c548" />
+
+#### My Report
+<img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/ddc349fb-9f47-4535-a56d-708949f007cc" />
+
+#### ChatBot
+<img width="1918" height="997" alt="image" src="https://github.com/user-attachments/assets/18dacd40-19c7-4e7c-a6ba-500dcaba9ab5" />
+
+### Admin
+#### Dashboard
+<img width="1917" height="1062" alt="image" src="https://github.com/user-attachments/assets/27c478f7-2f60-4fe9-b0d8-8181d3b08689" />
+<img width="1919" height="1069" alt="image" src="https://github.com/user-attachments/assets/5ad77730-4dff-49c4-a314-b2b3286ae6f9" />
+
+#### Submit Report
+<img width="1918" height="1067" alt="image" src="https://github.com/user-attachments/assets/b1768059-9ffd-455e-9d57-63655d5ce8c9" />
+<img width="1919" height="1066" alt="image" src="https://github.com/user-attachments/assets/5a4f8183-0edc-4767-a49c-bdb32a7eacea" />
+
+#### My Report
+<img width="1913" height="1063" alt="image" src="https://github.com/user-attachments/assets/11fbecd5-eefd-4f06-a93e-8fddcd08922b" />
+
+#### Admin
+<img width="1919" height="1062" alt="image" src="https://github.com/user-attachments/assets/fb6c0365-5605-4d6c-813a-07b8c07f6a01" />
+<img width="1919" height="1068" alt="image" src="https://github.com/user-attachments/assets/af09dda5-9f04-4e35-81c9-e3bb67728012" />
+
+#### Chatbot
+<img width="1919" height="1069" alt="image" src="https://github.com/user-attachments/assets/e3970d80-e293-4658-9772-72924ab9d492" />
 
 ## 🛠️ Tech Stack
 
