@@ -72,10 +72,10 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 <img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/c39e8384-e41a-4f9f-ada6-55fff2ffde3d" />
 
 #### ChatBot
-<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/c0cf72ef-97d7-4240-bb48-8504f824419d" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/b5941ebf-d147-4be5-90ae-2daf3e03f4d7" />
 
 #### Chat User to Admin
-<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/d0f1526a-425e-48d5-9363-9d27629518b2" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/dbe193e4-290f-4ef7-8a43-1c828cffd905" />
 
 ### Admin
 #### Home
@@ -95,7 +95,7 @@ CampusReport menyediakan platform terpusat dengan fitur-fitur modern:
 <img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/04e01f81-ae52-48c8-9835-bb47b671da5e" />
 
 #### Chatbot
-<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/b8079be6-ca74-4218-8176-367713f3196c" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/e8f67da6-5e34-4775-89eb-5c1bdd234ab7" />
 
 #### Chat Admin to User
 <img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/779b4218-a5a9-47f8-89dc-40e64da41103" />
