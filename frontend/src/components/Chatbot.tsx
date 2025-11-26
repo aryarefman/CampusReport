@@ -33,6 +33,20 @@ export default function Chatbot() {
         scrollToBottom();
     }, [messages]);
 
+    // Listen for closeUserChat event
+    useEffect(() => {
+        const handleClose = () => setIsOpen(false);
+        window.addEventListener('closeChatbot', handleClose);
+        return () => window.removeEventListener('closeChatbot', handleClose);
+    }, []);
+
+    // Dispatch event when opening to close UserChat
+    useEffect(() => {
+        if (isOpen) {
+            window.dispatchEvent(new Event('closeUserChat'));
+        }
+    }, [isOpen]);
+
     const sendMessage = async () => {
         if (!input.trim() || isLoading) return;
 
@@ -100,7 +114,7 @@ export default function Chatbot() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    zIndex: 999,
+                    zIndex: 2000,
                     transition: 'transform 0.3s ease',
                     transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)'
                 }}
@@ -122,8 +136,8 @@ export default function Chatbot() {
                     className="chatbot-card"
                     style={{
                         position: 'fixed',
-                        bottom: '90px',
-                        right: '20px',
+                        bottom: '30px',
+                        right: '100px',
                         width: '100%',
                         maxWidth: '380px',
                         height: '500px',
@@ -131,7 +145,7 @@ export default function Chatbot() {
                         borderRadius: '16px',
                         boxShadow: 'var(--shadow-lg)',
                         border: '1px solid var(--border-color)',
-                        zIndex: 999,
+                        zIndex: 2000,
                         display: 'flex',
                         flexDirection: 'column',
                         overflow: 'hidden',
@@ -279,7 +293,8 @@ export default function Chatbot() {
             max-width: calc(100% - 40px) !important;
             right: 20px !important;
             left: 20px !important;
-            height: 450px !important;
+            height: calc(100vh - 120px) !important;
+            bottom: 90px !important;
           }
         }
         
@@ -289,7 +304,7 @@ export default function Chatbot() {
             max-width: calc(100% - 20px) !important;
             right: 10px !important;
             left: 10px !important;
-            height: 400px !important;
+            height: calc(100vh - 100px) !important;
             bottom: 80px !important;
           }
           

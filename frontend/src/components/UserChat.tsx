@@ -42,6 +42,20 @@ const UserChat: React.FC = () => {
         scrollToBottom();
     }, [chat?.messages]);
 
+    // Listen for closeUserChat event
+    useEffect(() => {
+        const handleClose = () => setIsOpen(false);
+        window.addEventListener('closeUserChat', handleClose);
+        return () => window.removeEventListener('closeUserChat', handleClose);
+    }, []);
+
+    // Dispatch event when opening to close Chatbot
+    useEffect(() => {
+        if (isOpen) {
+            window.dispatchEvent(new Event('closeChatbot'));
+        }
+    }, [isOpen]);
+
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -151,7 +165,7 @@ const UserChat: React.FC = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     transition: 'all 0.3s ease',
-                    zIndex: 1000
+                    zIndex: 2000
                 }}
             >
                 <MessageCircle size={28} />
@@ -181,7 +195,7 @@ const UserChat: React.FC = () => {
                 <div className="user-chat-window" style={{
                     position: 'fixed',
                     bottom: '30px',
-                    right: '30px',
+                    right: '100px',
                     width: '380px',
                     height: '500px',
                     backgroundColor: 'var(--card-bg)',
@@ -189,7 +203,7 @@ const UserChat: React.FC = () => {
                     boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
                     display: 'flex',
                     flexDirection: 'column',
-                    zIndex: 1001,
+                    zIndex: 2000,
                     border: '1px solid var(--border-color)',
                     overflow: 'hidden'
                 }}>

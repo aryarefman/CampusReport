@@ -18,3 +18,19 @@
         opacity: 1;
     }
 }
+
+@media (max-width: 768px) {
+    .user-chat-window {
+        width: calc(100% - 40px) !important;
+        right: 20px !important;
+        left: 20px !important;
+        bottom: 90px !important;
+        height: calc(100vh - 120px) !important;
+        max-height: 500px;
+    }
+
+    .user-chat-button {
+        bottom: 20px !important;
+        right: 20px !important;
+    }
+}

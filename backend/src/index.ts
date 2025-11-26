@@ -1,7 +1,9 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
 
 import './config/mongo';
 import authRoutes from './routes/auth.routes';
@@ -9,8 +11,6 @@ import reportRoutes from './routes/report.routes';
 import chatbotRoutes from './routes/chatbot.routes';
 import chatRoutes from './routes/chat.routes';
 import userRoutes from './routes/user.routes';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

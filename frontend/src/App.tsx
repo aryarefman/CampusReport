@@ -132,7 +132,7 @@ function AppContent() {
     <>
       <Navbar />
       <AppRoutes />
-      {!isAuthPage && <Chatbot />}
+      {!isAuthPage && location.pathname !== '/admin/chat' && <Chatbot />}
       {!isAuthPage && isAuthenticated && user?.role !== 'admin' && <UserChat />}
       <ToastContainer position="top-right" autoClose={3000} />
     </>
